@@ -55,7 +55,7 @@ public class SpriteInspector : MonoBehaviour
 	private Sprite sprite;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (image == null)
         {
@@ -80,27 +80,27 @@ public class SpriteInspector : MonoBehaviour
 
 			// 图片实际渲染容器
 			var tfm = image.rectTransform;
-			//image.rectTransform.pivot = new Vector2(sprite.pivot.x / sprite.textureRect.width, sprite.pivot.y / sprite.textureRect.height);
-			//image.SetNativeSize();
+            //image.rectTransform.pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
+            //image.SetNativeSize();
+
+			var pixelsPerUnit = sprite.pixelsPerUnit;
 
             // 图片实际显示缩放比例
-            var scale = new Vector2(tfm.rect.width/sprite.textureRect.width,  tfm.rect.height/sprite.textureRect.height);
+            var scale = new Vector2(tfm.rect.width/sprite.rect.width,  tfm.rect.height/sprite.rect.height);
             // 考虑图片实际显示后缩放变形
             var pivot = Vector2.Scale(sprite.pivot, scale);
             // 考虑缩放因素后变形点归位偏移
             var offset = new Vector2(pivot.x - tfm.rect.width * tfm.pivot.x, pivot.y - tfm.rect.height * tfm.pivot.y);
-
-			var factor = sprite.pixelsPerUnit;
             for (var i = 0; i < sprite.triangles.Length; i += 3)
             {
                 // 标准单位转像素单位
-                var v1 = sprite.vertices[sprite.triangles[i]] * factor;
-                var v2 = sprite.vertices[sprite.triangles[i + 1]] * factor;
-                var v3 = sprite.vertices[sprite.triangles[i + 2]] * factor;
+                var v1 = sprite.vertices[sprite.triangles[i]] * pixelsPerUnit;
+                var v2 = sprite.vertices[sprite.triangles[i + 1]] * pixelsPerUnit;
+                var v3 = sprite.vertices[sprite.triangles[i + 2]] * pixelsPerUnit;
                 // 缩放+变形点偏移+局部坐标转世界坐标
-                v1 = transform.TransformPoint(Vector2.Scale(v1, scale) + offset);
-                v2 = transform.TransformPoint(Vector2.Scale(v2, scale) + offset);
-                v3 = transform.TransformPoint(Vector2.Scale(v3, scale) + offset);
+                v1 = tfm.TransformPoint(Vector2.Scale(v1, scale) + offset);
+                v2 = tfm.TransformPoint(Vector2.Scale(v2, scale) + offset);
+                v3 = tfm.TransformPoint(Vector2.Scale(v3, scale) + offset);
                 // 绘制三角形
                 Debug.DrawLine(v1, v2, color);
                 Debug.DrawLine(v1, v3, color);
