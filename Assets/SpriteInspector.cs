@@ -28,9 +28,9 @@ public static class SpriteExtension
     {
         var buffer = new StringBuilder();
         buffer.Append('[');
-        for (var i = 0; i < triangles.Length; i+=3)
+        for (var i = 0; i < triangles.Length; i += 3)
         {
-            buffer.Append(string.Format("[{3}]{{{0},{1},{2}}}", triangles[i], triangles[i+1], triangles[i+2], i / 3));
+            buffer.Append(string.Format("[{3}]{{{0},{1},{2}}}", triangles[i], triangles[i + 1], triangles[i + 2], i / 3));
             if (i < triangles.Length - 3)
             {
                 buffer.Append(',');
@@ -52,7 +52,7 @@ public class SpriteInspector : MonoBehaviour
     [Space]
     [SerializeField] public Color color = Color.green;
 
-	private Sprite sprite;
+    private Sprite sprite;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -78,15 +78,15 @@ public class SpriteInspector : MonoBehaviour
             sprite = image.sprite;
             if (sprite == null) { return; }
 
-			// 图片实际渲染容器
-			var tfm = image.rectTransform;
+            // 图片实际渲染容器
+            var tfm = image.rectTransform;
             //image.rectTransform.pivot = new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height);
             //image.SetNativeSize();
 
-			var pixelsPerUnit = sprite.pixelsPerUnit;
+            var pixelsPerUnit = sprite.pixelsPerUnit;
 
             // 图片实际显示缩放比例
-            var scale = new Vector2(tfm.rect.width/sprite.rect.width,  tfm.rect.height/sprite.rect.height);
+            var scale = new Vector2(tfm.rect.width / sprite.rect.width, tfm.rect.height / sprite.rect.height);
             // 考虑图片实际显示后缩放变形
             var pivot = Vector2.Scale(sprite.pivot, scale);
             // 考虑缩放因素后变形点归位偏移
