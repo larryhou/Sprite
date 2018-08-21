@@ -1,0 +1,12 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/SpriteAtlas/TexturePacker/tp_sprites.tpsheet
+textureFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/SpriteAtlas/TexturePacker/tp_sprites.png
+normalmapFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- Assets/SpriteAtlas/TexturePacker/tp_sprites_n.png
+enableDebugOutput: 0
