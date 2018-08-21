@@ -54,7 +54,7 @@ public class SpriteInspector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (image == null)
+        if (spriteRenderer != null)
         {
             sprite = spriteRenderer.sprite;
             if (sprite == null) { return; }
@@ -70,7 +70,7 @@ public class SpriteInspector : MonoBehaviour
                 Debug.DrawLine(v2, v3, color);
             }
         }
-        else
+        else if (image != null)
         {
             sprite = image.sprite;
             if (sprite == null) { return; }
