@@ -55,7 +55,7 @@ public class SpriteInspector : MonoBehaviour
     private Sprite sprite;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (image == null)
         {
